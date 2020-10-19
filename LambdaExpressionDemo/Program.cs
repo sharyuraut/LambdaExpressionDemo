@@ -19,6 +19,8 @@ namespace LambdaExpressionDemo
             GiveAverageAge(listPersonInCity);
             Console.WriteLine("------------");
             CheckSpecificNamePresent(listPersonInCity);
+            Console.WriteLine("------------");
+            SkipRecord_IfAgeIsLessThan60(listPersonInCity);
         }
 
         //UC1
@@ -30,7 +32,9 @@ namespace LambdaExpressionDemo
             listPersonInCity.Add(new Person("qre", "zxxv", "wse", 32));
             listPersonInCity.Add(new Person("wdx", "wsdf", "aws", 10));
             listPersonInCity.Add(new Person("zse", "asde", "wed", 50));
-            //Console.WriteLine(listPersonInCity.ToString());
+            listPersonInCity.Add(new Person("zse", "asde", "wed", 50));
+            listPersonInCity.Add(new Person("zbse", "asdhe", "weud", 80));
+            listPersonInCity.Add(new Person("zske", "asden", "whyed", 70));
         }
 
         //UC 2
@@ -67,13 +71,22 @@ namespace LambdaExpressionDemo
         {
             Console.WriteLine("Enter a name to search: ");
             string name = Console.ReadLine();
-            if(listPersonInCity.Any(e => (e.Name == name)))
+            if(listPersonInCity.Any(e => (e.Name.Equals(name))))
             {
                 Console.WriteLine("Person Present");
             }
             else
             {
                 Console.WriteLine("Person not present");
+            }
+        }
+
+        //UC6
+        private static void SkipRecord_IfAgeIsLessThan60(List<Person> listPersonInCity)
+        {
+            foreach (Person person in listPersonInCity.OrderBy(e => e.Age).SkipWhile(e => e.Age < 60))
+            {
+                Console.WriteLine("Name :" + person.Name + " Age :" + person.Age);
             }
         }
     }
