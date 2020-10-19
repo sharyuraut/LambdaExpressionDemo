@@ -21,6 +21,8 @@ namespace LambdaExpressionDemo
             CheckSpecificNamePresent(listPersonInCity);
             Console.WriteLine("------------");
             SkipRecord_IfAgeIsLessThan60(listPersonInCity);
+            Console.WriteLine("------------");
+            RemoveSpecificNameFromList(listPersonInCity);
         }
 
         //UC1
@@ -87,6 +89,19 @@ namespace LambdaExpressionDemo
             foreach (Person person in listPersonInCity.OrderBy(e => e.Age).SkipWhile(e => e.Age < 60))
             {
                 Console.WriteLine("Name :" + person.Name + " Age :" + person.Age);
+            }
+        }
+
+        //UC7
+        public static void RemoveSpecificNameFromList(List<Person> personList)
+        {
+            Console.WriteLine("Enter name to remove: ");
+            string name = Console.ReadLine();
+            personList.RemoveAll(e => e.Name.Equals(name));
+            Console.WriteLine("Record removed successfully");
+            foreach (Person p in personList)
+            {
+                Console.WriteLine("Name :" + p.Name + " Age :" + p.Age);
             }
         }
     }
